@@ -11,29 +11,26 @@ import WebKit
 
 class WKWebViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let configuration =  WKWebViewConfiguration()
-        configuration.dataDetectorTypes = [.phoneNumber, .link]
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    let configuration =  WKWebViewConfiguration()
+    configuration.dataDetectorTypes = [.phoneNumber, .link]
 
-        let webView = WKWebView(frame: self.view.frame, configuration: configuration)
-        self.view.addSubview(webView)
+    let webView = WKWebView(frame: self.view.frame, configuration: configuration)
+    self.view.addSubview(webView)
 
-        let path = Bundle.main.path(forResource: "test", ofType: "html")!
-        let url = URL(fileURLWithPath: path)
-        let request = URLRequest(url: url)
+    let path = Bundle.main.path(forResource: "test", ofType: "html")!
+    let url = URL(fileURLWithPath: path)
+    let request = URLRequest(url: url)
 
-        webView.navigationDelegate = self
+    webView.navigationDelegate = self
 
-        webView.load(request)
-    }
+    webView.load(request)
+  }
 }
 
 extension WKWebViewController : WKNavigationDelegate {
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        webView.evaluateJavaScript("addContent('http://helpscout.com')") { (result, error) in
-            // ??
-        }
-    }
+  func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    webView.evaluateJavaScript("addContent('http://helpscout.com')")
+  }
 }
-
